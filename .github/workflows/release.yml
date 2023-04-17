@@ -71,6 +71,13 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_REGISTRY_TOKEN }}
+
       - name: Build and push image
         uses: docker/build-push-action@v4
         with:
@@ -81,6 +88,7 @@ jobs:
           push: true
           tags: |
             kirillzak/docker-rocky-ansible:${{ matrix.version_branch }}.${{ matrix.version_minor_release }}
+            ghcr.io/${{ github.repository }}:${{ matrix.version_branch }}.${{ matrix.version_minor_release }}
 
   latest-release:
     name: Latest release
@@ -103,6 +111,13 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_REGISTRY_TOKEN }}
+
       - name: Build and push image
         uses: docker/build-push-action@v3
         with:
@@ -113,3 +128,4 @@ jobs:
           push: true
           tags: |
             kirillzak/docker-rockry-ansible:latest
+            ghcr.io/${{ github.repository }}:latest
