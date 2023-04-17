@@ -19,6 +19,8 @@ jobs:
         include:
           - version_branch: 8
             version_minor_release: 5
+          - version_branch: 8
+            version_minor_release: 6
 
     steps:
       - name: Checkout out the codebase
