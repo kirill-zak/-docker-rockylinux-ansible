@@ -15,12 +15,14 @@ jobs:
       fail-fast: false
 
       matrix:
-        version_branch: [8]
+        version_branch: [8, 9]
         include:
           - version_branch: 8
             version_minor_release: 5
           - version_branch: 8
             version_minor_release: 6
+          - version_branch: 9
+            version_minor_release: 0
 
     steps:
       - name: Checkout out the codebase
