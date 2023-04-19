@@ -20,11 +20,10 @@ jobs:
 
       matrix:
         version_branch: [8]
+        version_minor_release: [5, 6]
         include:
-          - version_branch: 8
-            version_minor_release: 5
-          - version_branch: 8
-            version_minor_release: 6
+          - version_branch: 9
+            version_minor_release: 0
 
     steps:
       - name: Checkout out the codebase
@@ -53,11 +52,10 @@ jobs:
 
       matrix:
         version_branch: [8]
+        version_minor_release: [5, 6]
         include:
-          - version_branch: 8
-            version_minor_release: 5
-          - version_branch: 8
-            version_minor_release: 6
+          - version_branch: 9
+            version_minor_release: 0
 
     steps:
       - name: Checkout out the codebase
@@ -125,9 +123,9 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v3
         with:
-          build-args: VERSION=8.6
+          build-args: VERSION=9.0
           context: ./
-          file: ./rocky8/Dockerfile
+          file: ./rocky9/Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
