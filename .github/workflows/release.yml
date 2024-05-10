@@ -19,17 +19,31 @@ jobs:
       fail-fast: false
 
       matrix:
-        version_branch: [8]
-        version_minor_release: [5, 6, 7, 8, 9]
-        include:
-          - version_branch: 9
+        version_branch: [8, 9]
+        version_minor_release: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        exclude:
+          - version_branch: 8
             version_minor_release: 0
-          - version_branch: 9
+          - version_branch: 8
             version_minor_release: 1
-          - version_branch: 9
+          - version_branch: 8
             version_minor_release: 2
-          - version_branch: 9
+          - version_branch: 8
             version_minor_release: 3
+          - version_branch: 8
+            version_minor_release: 4
+          - version_branch: 9
+            version_minor_release: 4
+          - version_branch: 9
+            version_minor_release: 5
+          - version_branch: 9
+            version_minor_release: 6
+          - version_branch: 9
+            version_minor_release: 7
+          - version_branch: 9
+            version_minor_release: 8
+          - version_branch: 9
+            version_minor_release: 9
 
     steps:
       - name: Checkout out the codebase
@@ -93,7 +107,7 @@ jobs:
           password: ${{ secrets.GHCR_REGISTRY_TOKEN }}
 
       - name: Build and push image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           build-args: VERSION=${{ matrix.version_branch }}.${{ matrix.version_minor_release }}
           context: ./rocky${{ matrix.version_branch }}/.
@@ -132,7 +146,7 @@ jobs:
           password: ${{ secrets.GHCR_REGISTRY_TOKEN }}
 
       - name: Build and push image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v5
         with:
           build-args: VERSION=9.3
           context: ./rocky9/.
