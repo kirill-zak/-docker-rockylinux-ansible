@@ -223,11 +223,12 @@ jobs:
           mkdir -p /tmp/digests
           digest="${{ steps.build.outputs.digest }}"
           touch "/tmp/digests/${digest#sha256:}"
+          echo "CONTAINER_DIGEST=${digest#sha256:}" >> $GITHUB_ENV
 
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-${{ matrix.version_branch }}-${{ matrix.version_minor_release }}
+          name: digests-${{ env.CONTAINER_DIGEST }}
           path: /tmp/digests/*
           if-no-files-found: error
           retention-days: 1
