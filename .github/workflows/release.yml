@@ -149,8 +149,23 @@ jobs:
       fail-fast: false
 
       matrix:
+        platform: [linux/amd64,linux/arm64/v8]
         version_branch: [9]
         version_minor_release: [0, 1, 2, 3]
+        include:
+          - version_branch: 9
+            version_minor_release: 1
+            platform: linux/amd64,linux/arm64/v8,linux/ppc64le
+          - version_branch: 9
+            version_minor_release: 3
+            platform: linux/amd64,linux/arm64/v8,linux/ppc64le
+        exclude:
+          - version_branch: 9
+            version_minor_release: 1
+            platform: linux/amd64,linux/arm64/v8
+          - version_branch: 9
+            version_minor_release: 3
+            platform: linux/amd64,linux/arm64/v8
 
     steps:
       - name: Checkout out the codebase
@@ -188,7 +203,7 @@ jobs:
           build-args: VERSION=${{ matrix.version_branch }}.${{ matrix.version_minor_release }}
           context: ./
           file: ./rocky${{ matrix.version_branch }}/Dockerfile
-          platforms: linux/amd64,linux/arm64/v8
+          platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
           outputs: type=image,name=${{ env.REGISTRY_IMAGE }},name-canonical=true
           push: true
@@ -251,7 +266,7 @@ jobs:
           build-args: VERSION=9.3
           context: ./
           file: ./rocky9/Dockerfile
-          platforms: linux/amd64,linux/arm64/v8
+          platforms: linux/amd64,linux/arm64/v8,linux/ppc64le
           labels: ${{ steps.meta.outputs.labels }}
           outputs: type=image,name=${{ env.REGISTRY_IMAGE }},name-canonical=true
           push: true
