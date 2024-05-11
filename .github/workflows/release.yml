@@ -175,11 +175,6 @@ jobs:
             platform: linux/amd64,linux/arm64/v8,linux/s390x
 
     steps:
-      - name: Prepare
-        run: |
-          platform=${{ matrix.platform }}
-          echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
-
       - name: Checkout out the codebase
         uses: actions/checkout@v4
       
@@ -228,11 +223,12 @@ jobs:
           mkdir -p /tmp/digests
           digest="${{ steps.build.outputs.digest }}"
           touch "/tmp/digests/${digest#sha256:}"
+          echo "CONTAINER_DIGEST=${digest#sha256:}" >> $GITHUB_ENV
 
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-${{ steps.build.outputs.digest }}
+          name: digests-${{ env.CONTAINER_DIGEST }}
           path: /tmp/digests/*
           if-no-files-found: error
           retention-days: 1
