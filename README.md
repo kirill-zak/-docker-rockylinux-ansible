@@ -5,6 +5,10 @@ Rocky Linux docker container with built-in Ansible for playbook and role testing
 - `8.x`: Based on branch `8.x`. Releases: `8.5`, `8.6`, `8.7`, `8.8`, `8.9`.
 - `9.x`: Based on branch `9.x`. Releases: `9.0`, `9.1`, `9.2`, `9.3`.
 
+## Platforms
+- `linux/amd64`
+- `linux/arm64/v8`
+
 ## How to Build
 
 To build the image on your own locally, do the following:
