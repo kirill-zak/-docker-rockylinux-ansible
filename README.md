@@ -9,6 +9,7 @@ Rocky Linux docker container with built-in Ansible for playbook and role testing
 - `linux/amd64`
 - `linux/arm64/v8`
 - `linux/ppc64le` (only `9.1`, `9.3`)
+- `linux/s390x` (only branch `9` (except `9.0`))
 
 ## How to Build
 
