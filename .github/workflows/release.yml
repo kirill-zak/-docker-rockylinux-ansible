@@ -232,7 +232,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-${{ matrix.version_branch }}-${{ matrix.version_minor_release }}-${{ env.PLATFORM_PAIR }}
+          name: digests-${{ steps.build.outputs.digest }}
           path: /tmp/digests/*
           if-no-files-found: error
           retention-days: 1
