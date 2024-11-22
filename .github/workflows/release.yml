@@ -37,8 +37,6 @@ jobs:
           - version_branch: 8
             version_minor_release: 4
           - version_branch: 9
-            version_minor_release: 4
-          - version_branch: 9
             version_minor_release: 5
           - version_branch: 9
             version_minor_release: 6
@@ -152,7 +150,7 @@ jobs:
         platform: 
           - linux/amd64,linux/arm64/v8,linux/s390x
         version_branch: [9]
-        version_minor_release: [0, 1, 2, 3]
+        version_minor_release: [0, 1, 2, 3, 4]
         include:
           - version_branch: 9
             version_minor_release: 0
@@ -271,7 +269,7 @@ jobs:
         id: build
         uses: docker/build-push-action@v6
         with:
-          build-args: VERSION=9.3
+          build-args: VERSION=9.4
           context: ./
           file: ./rocky9/Dockerfile
           platforms: linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x

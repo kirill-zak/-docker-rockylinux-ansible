@@ -3,7 +3,7 @@ ARG VERSION
 # Get build platform
 ARG BUILDPLATFORM=linux/amd64
 
-FROM --platform=$BUILDPLATFORM rockylinux:${VERSION}
+FROM --platform=$BUILDPLATFORM rockylinux/rockylinux:${VERSION}
 LABEL maintainer="Kirill Ziuzin"
 ENV container=docker
 
